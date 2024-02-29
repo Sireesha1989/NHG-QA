@@ -12,7 +12,7 @@ namespace TechnicalTest
     {
         private readonly RestService _resrService;
         private readonly ConfigurationProvider _configurationProvider;
-        private RestResponse Response;
+        private RestResponse _response;
 
         public LocationClient(RestService restService, ConfigurationProvider configurationProvider)
         {
@@ -23,11 +23,29 @@ namespace TechnicalTest
         public void GetLocationInformation(string countryCode, string postCode)
         {
             var url = _configurationProvider.GetUrl();
+            var resource = $"location/{countryCode}/{postCode}";
+            var restClient = new RestClient(url);
+            var request = new RestRequest(resource, Method.Get);
+            _response = restClient.Execute(request);
         }
 
         public void VerifyRequestStatus(string isSuccessful)
         {
-
+           if (_response != null)
+            {
+                if (_response.IsSuccessful)
+                {
+                    Console.WriteLine("Request was successful.");
+                }
+                else
+                {
+                    Console.WriteLine($"Request failed with status code: {_response.StatusCode}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No response received.");
+            }
         }
     }
 }
