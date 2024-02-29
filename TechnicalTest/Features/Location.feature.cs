@@ -75,8 +75,8 @@ namespace TechnicalTest.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Make successful location information")]
-        [NUnit.Framework.TestCaseAttribute("AD", "AD100", "true", null)]
-        [NUnit.Framework.TestCaseAttribute("AT", "96799", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("AD", "AD100", "True", null)]
+        [NUnit.Framework.TestCaseAttribute("AT", "96799", "False", null)]
         public void MakeSuccessfulLocationInformation(string countryCode, string postCode, string isSuccessful, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;

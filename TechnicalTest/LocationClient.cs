@@ -3,6 +3,7 @@ using NUnit.Framework;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TechnicalTest.Service;
 
@@ -23,7 +24,8 @@ namespace TechnicalTest
         public void GetLocationInformation(string countryCode, string postCode)
         {
             var url = _configurationProvider.GetUrl();
-            var resource = $"location/{countryCode}/{postCode}";
+
+            var resource = $"{countryCode}/{postCode}";
             var restClient = new RestClient(url);
             var request = new RestRequest(resource, Method.Get);
             _response = restClient.Execute(request);
@@ -31,10 +33,11 @@ namespace TechnicalTest
 
         public void VerifyRequestStatus(string isSuccessful)
         {
-           if (_response != null)
+            if (_response != null)
             {
-                if (_response.IsSuccessful)
+                if (_response.IsSuccessStatusCode)
                 {
+                    Assert.AreEqual(isSuccessful, (_response.IsSuccessful).ToString());
                     Console.WriteLine("Request was successful.");
                 }
                 else

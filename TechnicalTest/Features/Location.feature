@@ -5,5 +5,5 @@ Given I make a request to get location information <countryCode>,<postCode>
 Then I verify the request status <isSuccessful>
 Examples: 
 | countryCode | postCode | isSuccessful |
-| AD          | AD100    | true         |
-| AT          | 96799    | false        |
+| AD          | AD100    | True         |
+| AT          | 96799    | False        |
