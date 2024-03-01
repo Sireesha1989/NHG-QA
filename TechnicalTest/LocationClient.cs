@@ -29,6 +29,7 @@ namespace TechnicalTest
             var restClient = new RestClient(url);
             var request = new RestRequest(resource, Method.Get);
             _response = restClient.Execute(request);
+            Trace.WriteLine(_response);
         }
 
         public void VerifyRequestStatus(string isSuccessful)
@@ -42,6 +43,7 @@ namespace TechnicalTest
                 }
                 else
                 {
+                    Assert.AreEqual(isSuccessful, (_response.IsSuccessful).ToString());
                     Console.WriteLine($"Request failed with status code: {_response.StatusCode}");
                 }
             }
